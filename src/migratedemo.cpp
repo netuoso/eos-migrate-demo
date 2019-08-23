@@ -7,6 +7,9 @@
 #include <migratedemo.hpp>
 
 ACTION migratedemo::insert() {
+
+  require_auth(_self);
+
   items items_table(_self, _self.value);
   items_table.emplace(_self, [&](auto& o){
     o.id = items_table.available_primary_key();
@@ -20,6 +23,8 @@ ACTION migratedemo::migrate( uint16_t version ) {
     depending on the version number that is specified in the action call
     When a table is empty, it is safe to modify the table structure
   */
+
+  require_auth(_self);
 
   if( version == 1 ) { // move rows from items_table to items_table2
 

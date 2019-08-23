@@ -6,6 +6,15 @@ way EOS Smart Contracts work, if there is existing data in a table that gets mod
 struct format. This example smart contract shows a method of migrating data from one table to another, allowing the user to
 modify the old table.
 
+### How to Use
+	- Insert some data (run a few times)
+		- `cleos push action CONTRACTNAME insert '{}' -p USERNAME`
+	- Migrate the data from `items` to `items2`
+		- `cleos push action CONTRACTNAME migrate '{"version":1"}' -p USERNAME`
+	- Modify struct for `items` and deploy new contract
+	- Migrate the data from `items2` to `items`
+		- `cleos push action CONTRACTNAME migrate '{"version":2"}' -p USERNAME`
+
 ### Building
   - cd to 'build' directory
   - run the command 'cmake ..'
